@@ -5,11 +5,12 @@ import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-
+@Transactional  //jpa를 사용하려면 항상 필요함
 //@Component 어노테이션이 있으면 스프링빈으로 자동 등록된다.(Controller, Service, repository ..는 어노테이션 자체에 포함되어있음)
 public class MemberService {
 
