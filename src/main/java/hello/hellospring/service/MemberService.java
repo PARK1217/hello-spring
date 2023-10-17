@@ -26,16 +26,24 @@ public class MemberService {
      * @return
      */
     public long join(Member member) {
+
+        long start = System.currentTimeMillis();
         //같은 이름이 있는 중복회원은 안된다
 //        Optional<Member> result = memberRepository.findByName(member.getName());
 //        result.ifPresent(m -> {
 //            throw new IllegalStateException("이미 존재하는 회원입니다.");
 //        });
 
-        validateDuplicateMember(member);    //중복회원 검증 메서드
+        try {
+            validateDuplicateMember(member);    //중복회원 검증 메서드
 
-        memberRepository.save(member);
-        return member.getId();
+            memberRepository.save(member);
+            return member.getId();
+        } finally {
+            long finish = System.currentTimeMillis();
+            long timeMs = finish - start;
+            System.out.println("join = " + timeMs + "ms");
+        }
     }
 
     private void validateDuplicateMember(Member member) {
